@@ -1,32 +1,16 @@
-//$("li").click(function(){
-//    $(this).css("color","red");
-//});
+$("li").click(function(){
+    //this refers to the particular li that was clicked on
+    $(this).toggleClass("completed");
+});
 
-$("ul").on("click", "span", function(e){
-    //console.log(this);
+//we pass in the event object
+$("span").click(function(event){
+    // “this” inside of an event handler always 
+    // refers to the element it was triggered on.  
     $(this).parent().fadeOut(500, function(){
-        // console.log(this);
+        // the second 'this' here,  goes up the scope
+        // chain to 
         $(this).remove();
+    });
+    event.stopPropagation();
 });
-    e.stopPropagation();
-});
-
-$("input[type='text']").click(function(){
-    $(this).val("");
-}
-)
-
-$("input[type='text']").keypress(function(e){
-   if((e).which === 13){
-       //grabbing new todo text from input
-       var todoText = $(this).val();
-       //using val as a setter, to set an empty string
-       $(this).val("Add to do"); 
-       $("ul").append("<li><span><i class='fa fa-trash'></i></span> " + todoText + "</li>")
-    }
-});
-
-$("#toggle-form").click( function(){
-    $("input[type='text']").fadeToggle();
-});
-
